@@ -1,0 +1,20 @@
+# ninja log v6
+22	74	7595343389720128	C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	97aff4184a57048
+156	9882	7592645979626795	CMakeFiles/oop1_project.dir/src/main.cpp.obj	5af6b3645e214455
+125	8699	7592647142174287	CMakeFiles/oop1_project.dir/src/Wall.cpp.obj	943a0507fafd17ab
+91	8579	7592647141834290	CMakeFiles/oop1_project.dir/src/GiftTime.cpp.obj	5f5a4d3c9c4f5d00
+82	8569	7592647141754257	CMakeFiles/oop1_project.dir/src/GiftFreeze.cpp.obj	9c1e9317d371266
+70	8451	7592647141629244	CMakeFiles/oop1_project.dir/src/Enemy.cpp.obj	537070cee7a683a3
+78	8654	7592647141714257	CMakeFiles/oop1_project.dir/src/GiftAddLive.cpp.obj	c73922d1429541b8
+74	8274	7592647141662609	CMakeFiles/oop1_project.dir/src/Gift.cpp.obj	48c36bef8731a62a
+94	8484	7592647141874278	CMakeFiles/oop1_project.dir/src/Object.cpp.obj	19accb8a9308da45
+78	4506	7595343390270122	CMakeFiles/oop1_project.dir/src/Player.cpp.obj	9cbb1b9f6c20fc8c
+44	9962	7592645978513794	CMakeFiles/oop1_project.dir/src/Button.cpp.obj	152b4fb3add6ac65
+102	8586	7592647141954276	CMakeFiles/oop1_project.dir/src/Rock.cpp.obj	d4436aa24f92a64a
+111	8456	7592647142044305	CMakeFiles/oop1_project.dir/src/UpdatingObject.cpp.obj	ea4d39c220bac6c
+106	8717	7592647141994273	CMakeFiles/oop1_project.dir/src/StaticObject.cpp.obj	91656a584708f398
+87	8475	7592647141794304	CMakeFiles/oop1_project.dir/src/GiftKillEnemy.cpp.obj	7984f5de6ef94aab
+63	8014	7592647141569234	CMakeFiles/oop1_project.dir/src/Door.cpp.obj	fd26b6e3bc38dc0c
+139	10364	7592645979466795	CMakeFiles/oop1_project.dir/src/TextureManager.cpp.obj	3a7774bcaf6d6fa6
+59	4630	7592653513741532	CMakeFiles/oop1_project.dir/src/Controller.cpp.obj	6041d7d3b035e0e3
+4507	6177	7595343434556821	oop1_project.exe	61b6bdb1591767f5
