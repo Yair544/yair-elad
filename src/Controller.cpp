@@ -19,7 +19,6 @@
 #include <TextureManager.h>
 #include <SFML/Graphics.hpp>
 
-//  new comment  
 //-------------------------------prototype---------------------------------------
 void loadLevelToStringVector(std::ifstream& file, std::vector<std::string>& levelByChars, int& rows, int& cols);
 
