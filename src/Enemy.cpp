@@ -10,6 +10,8 @@ Enemy::Enemy(sf::Vector2f v)
 {
     setSprite(v, "enemy");
 }
+// new comment
+
 
 
 
