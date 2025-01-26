@@ -11,7 +11,7 @@ Door::Door(sf::Vector2f v)
     setSprite(v, "door");
 }
 
-
+//elad
 
 
 
