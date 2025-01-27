@@ -11,9 +11,9 @@ Door::Door(sf::Vector2f v)
     setSprite(v, "door");
 }
 
+bool Door::isAlive() const {
+    return true;
+}
 
-
-
-
-
-
+void Door::setAlive(bool status) {
+}

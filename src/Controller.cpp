@@ -18,7 +18,8 @@
 #include <string>
 #include <TextureManager.h>
 #include <SFML/Graphics.hpp>
-// new comment
+#include <GameClock.h>
+
 //-------------------------------prototype---------------------------------------
 void loadLevelToStringVector(std::ifstream& file, std::vector<std::string>& levelByChars, int& rows, int& cols);
 
@@ -36,11 +37,16 @@ void checkAllCollisions(
     std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects,
     std::vector<std::unique_ptr<StaticObject>>& staticObjects);
 
+void displayTime(sf::RenderWindow& window, const GameClock& clock, sf::Font& font);
 
 //start
 void Controller::startGame()
 {
     sf::RenderWindow window(sf::VideoMode(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT), "Board and Button Example");
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        std::cerr << "Error loading font\n";
+    }
 
     //load texture to singleton
     TextureManager& textureManager = TextureManager::getInstance();
@@ -96,9 +102,21 @@ void Controller::startGame()
 
     // לולאת המשחק
     window.setFramerateLimit(60);
+    GameClock gameClock(60.f); // שעון עם 60 שניות למשחק
+    float enemyTimer = 0.f;
+    const float moveInterval = 0.5f; // תזוזה כל 0.5 שניות
+    sf::Clock deltaClock;
+
     while (window.isOpen())
     {
         float deltaTime = clock.restart().asSeconds();
+        // עדכון השעון
+        gameClock.update();
+        // בדיקת מצב המשחק
+        if (gameClock.isGameOver()) {
+            std::cout << "Game Over! Time's up.\n";
+            break;
+        }
 
         // טיפול באירועים
         sf::Event event;
@@ -115,7 +133,7 @@ void Controller::startGame()
         for (sf::Keyboard::Key key : {sf::Keyboard::Right, sf::Keyboard::Left, sf::Keyboard::Up, sf::Keyboard::Down})
         {
             if (sf::Keyboard::isKeyPressed(key)) {
-                player->move(speed, deltaTime, key);       
+                player->move(speed, deltaTime, key);
             }   
         }
 
@@ -123,6 +141,7 @@ void Controller::startGame()
 
         window.clear();
         drawAllObject(updatingObjects, staticObjects, window);
+        displayTime(window, gameClock, font);
         window.display();
     }
 }
@@ -270,5 +289,34 @@ void checkAllCollisions(
             }
         }
     }
+
+    // מחיקת אובייקטים שנהרסו
+    updatingObjects.erase(
+        std::remove_if(
+            updatingObjects.begin(),
+            updatingObjects.end(),
+            [](const std::unique_ptr<UpdatingObject>& obj) {
+                return obj && !obj->isAlive();
+            }),
+        updatingObjects.end());
+
+    // מחיקת אובייקטים שנהרסו
+    staticObjects.erase(
+        std::remove_if(
+            staticObjects.begin(),
+            staticObjects.end(),
+            [](const std::unique_ptr<StaticObject>& obj) {
+                return obj && !obj->isAlive();
+            }),
+        staticObjects.end());
 }
 
+void displayTime(sf::RenderWindow& window, const GameClock& clock, sf::Font& font) {
+    sf::Text timeText;
+    timeText.setFont(font);
+    timeText.setCharacterSize(30);
+    timeText.setFillColor(sf::Color::Green);
+    timeText.setString("Time Left: " + std::to_string(static_cast<int>(clock.getTimeLeft())) + "s");
+    timeText.setPosition(200.f, 500.f);
+    window.draw(timeText);
+}

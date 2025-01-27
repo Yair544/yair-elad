@@ -13,7 +13,9 @@ class Enemy : public UpdatingObject {
 private:
 
 public:
-    Enemy( sf::Vector2f v);
+    Enemy(sf::Vector2f v);
+
+    void onCollision(Object& other) override;
+    void handleCollisionWithPlayer(Player& player);
 
 };
-
