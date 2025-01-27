@@ -9,12 +9,14 @@
 Player::Player(sf::Vector2f v)
 {
     setSprite(v, "player");
+    this->setAmountLife(5);
 }
 
 
 void Player::move(int speed, float deltaTime, sf::Keyboard::Key key)
 {
     sf::Vector2f loc=getLocation();
+
     switch (key)
     {
     case sf::Keyboard::Right:
@@ -38,9 +40,23 @@ void Player::move(int speed, float deltaTime, sf::Keyboard::Key key)
     }
 }
 
-void Player::onCollision(Object& other){
-    std::cout << "player " << std::endl;
+void Player::onCollision(Object& other) {
+    other.handleCollisionWithPlayer(*this);
 }
 
+void Player::handleCollisionWithWall(Wall& wall) {
+    std::cout << "Player collided with a Wall! Stopping movement.\n";
+}
 
+void Player::handleCollisionWithEnemy(Enemy& enemy) {
+    std::cout << "Player collided with an Enemy! Losing life.\n";
+}
+
+int Player::getAmountLife() const {
+    return m_amount_life;
+}
+
+void Player::setAmountLife(int amount) {
+    m_amount_life = amount;
+}
 

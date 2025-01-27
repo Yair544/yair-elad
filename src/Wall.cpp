@@ -1,4 +1,4 @@
-
+#include "Player.h"
 #include "StaticObject.h"
 #include "object.h"
 #include "TextureManager.h"
@@ -13,7 +13,10 @@ Wall::Wall(sf::Vector2f v)
 }
 
 void Wall::onCollision(Object& other) {
-    std::cout << "wall " << std::endl;
+    other.handleCollisionWithWall(*this);
+}
+
+void Wall::handleCollisionWithPlayer(Player& player) {
 }
 
 bool Wall::isAlive() const {

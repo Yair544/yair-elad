@@ -13,3 +13,5 @@ configure_file ("Freeze.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("addLive.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("killEnemy.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("time.png" ${CMAKE_BINARY_DIR} COPYONLY)
+
+configure_file ("arial.ttf" ${CMAKE_BINARY_DIR} COPYONLY)

@@ -44,17 +44,24 @@ void Object::resizeSprite(float scaleSize)
      return m_sprite.getGlobalBounds();
  }
 
- void Object::onCollision(Object& other) {
-     std::cout << "Object " << std::endl;
- }
-
-
- // פונקציה לבדיקת מצב "חיים"
  bool Object::isAlive() const {
      return m_alive;
  }
 
- // פונקציה להגדרת מצב "חיים"
  void Object::setAlive(bool status) {
      m_alive = status;
  }
+
+
+
+
+ void Object::onCollision(Object& other) {
+     other.handleCollisionWith(*this);
+ }
+ // פונקציות להתנגשות עם סוגים ספציפיים
+  void Object::handleCollisionWith(Object& other) {
+      std::cout << "1111" << std::endl;
+  }
+  void Object::handleCollisionWithPlayer(class Player& player) {}
+  void Object::handleCollisionWithEnemy(class Enemy& enemy) {}
+  void Object::handleCollisionWithWall(class Wall& wall) {}

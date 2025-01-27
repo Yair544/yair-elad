@@ -26,10 +26,14 @@ public:
 
     sf::FloatRect getGlobalBounds() const;
 
-    virtual void onCollision(Object& other);
-
     virtual bool isAlive() const;
 
     virtual void setAlive(bool status);
+
+    virtual void onCollision(Object& other);
+    virtual void handleCollisionWith(Object& other);
+    virtual void handleCollisionWithPlayer(class Player& player);
+    virtual void handleCollisionWithEnemy(class Enemy& enemy);
+    virtual void handleCollisionWithWall(class Wall& wall);
 
 };
