@@ -47,3 +47,14 @@ void Object::resizeSprite(float scaleSize)
  void Object::onCollision(Object& other) {
      std::cout << "Object " << std::endl;
  }
+
+
+ // פונקציה לבדיקת מצב "חיים"
+ bool Object::isAlive() const {
+     return m_alive;
+ }
+
+ // פונקציה להגדרת מצב "חיים"
+ void Object::setAlive(bool status) {
+     m_alive = status;
+ }

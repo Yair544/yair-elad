@@ -16,5 +16,8 @@ public:
     Wall( sf::Vector2f v);
 
     void onCollision(Object& other);
+    bool isAlive() const override;
+    void setAlive(bool status) override;
+
 };
 

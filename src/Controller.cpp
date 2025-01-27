@@ -270,5 +270,25 @@ void checkAllCollisions(
             }
         }
     }
+
+    // מחיקת אובייקטים שנהרסו
+    updatingObjects.erase(
+        std::remove_if(
+            updatingObjects.begin(),
+            updatingObjects.end(),
+            [](const std::unique_ptr<UpdatingObject>& obj) {
+                return obj && !obj->isAlive();
+            }),
+        updatingObjects.end());
+
+    // מחיקת אובייקטים שנהרסו
+    staticObjects.erase(
+        std::remove_if(
+            staticObjects.begin(),
+            staticObjects.end(),
+            [](const std::unique_ptr<StaticObject>& obj) {
+                return obj && !obj->isAlive();
+            }),
+        staticObjects.end());
 }
 

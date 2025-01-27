@@ -14,6 +14,9 @@ private:
     
 public:
     Door( sf::Vector2f v);
+
+    bool isAlive() const override;
+    void setAlive(bool status) override;
     
 };
 

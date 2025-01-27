@@ -16,5 +16,10 @@ void Wall::onCollision(Object& other) {
     std::cout << "wall " << std::endl;
 }
 
+bool Wall::isAlive() const {
+    return true;
+}
 
+void Wall::setAlive(bool status){
+}
 
