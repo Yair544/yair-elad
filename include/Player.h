@@ -21,6 +21,7 @@ public:
     void move(int speed, float deltatime, sf::Keyboard::Key key);
 
     void onCollision(Object& other) override;
+    void onCollision(Object& other, Controller& controller);
     void handleCollisionWithWall(Wall& wall);
     void handleCollisionWithEnemy(Enemy & enemy) override;
 

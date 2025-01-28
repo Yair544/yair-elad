@@ -1,11 +1,8 @@
 #include "Controller.h"
-#include "Object.h"
 #include "Wall.h"
 #include "Enemy.h"
 #include "Door.h"
 #include "Rock.h"
-#include "UpdatingObject.h"
-#include "StaticObject.h"
 #include "Player.h"
 #include "Gift.h"
 #include "GiftAddLive.h"
@@ -14,10 +11,8 @@
 #include "GiftTime.h"
 #include <iostream>
 #include <Constants.h>
-#include <fstream>
 #include <string>
 #include <TextureManager.h>
-#include <SFML/Graphics.hpp>
 #include <GameClock.h>
 
 //-------------------------------prototype---------------------------------------
@@ -33,9 +28,6 @@ void drawAllObject(std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects
 
 Player* getPointerToPlayer(std::vector<std::unique_ptr<UpdatingObject>>& updatingObject);
 
-void checkAllCollisions(
-    std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects,
-    std::vector<std::unique_ptr<StaticObject>>& staticObjects);
 
 void displayTime(sf::RenderWindow& window, const GameClock& clock, sf::Font& font);
 
@@ -81,21 +73,19 @@ void Controller::startGame()
     //load file to vector
     std::vector<std::string> levelByChars;
     //std::vector<std::unique_ptr<Object>> allObject;
-    std::vector<std::unique_ptr<UpdatingObject>> updatingObjects;
-    std::vector<std::unique_ptr<StaticObject>> staticObjects;
+    
+
     int rows;
     int cols;
     loadLevelToStringVector(currLevel, levelByChars, rows, cols);
 
     for (const auto& line : levelByChars) { std::cout << line << std::endl; } //print file
         
-    loadAllObjectToVector(levelByChars, updatingObjects, staticObjects);
-    drawAllObject(updatingObjects, staticObjects, window);
+    loadAllObjectToVector(levelByChars, m_updatingObjects, m_staticObjects);
+    drawAllObject(m_updatingObjects, m_staticObjects, window);
 
-    Player* player = getPointerToPlayer(updatingObjects);
+    Player* player = getPointerToPlayer(m_updatingObjects);
    
-    // יצירת שעון
-    sf::Clock clock;
 
     // מהירות תנועה בפיקסלים לשנייה
     const float speed = 200.f;
@@ -109,7 +99,7 @@ void Controller::startGame()
 
     while (window.isOpen())
     {
-        float deltaTime = clock.restart().asSeconds();
+        float deltaTime = m_clock.restart().asSeconds();
         // עדכון השעון
         gameClock.update();
         // בדיקת מצב המשחק
@@ -134,17 +124,20 @@ void Controller::startGame()
         {
             if (sf::Keyboard::isKeyPressed(key)) {
                 player->move(speed, deltaTime, key);
-            }   
+            }
         }
 
-        checkAllCollisions(updatingObjects, staticObjects);
+        checkAllCollisions(m_updatingObjects, m_staticObjects);
 
         window.clear();
-        drawAllObject(updatingObjects, staticObjects, window);
+        drawAllObject(m_updatingObjects, m_staticObjects, window);
         displayTime(window, gameClock, font);
         window.display();
     }
 }
+void Controller::killEnemy() {
+    std::cout << "aaaaaa" << std::endl;
+};
 
 
 //-----------------------------------------------------------------------------
@@ -252,9 +245,9 @@ Player* getPointerToPlayer(std::vector<std::unique_ptr<UpdatingObject>>& updatin
 }
 
 //-----------------------------------------------------------------------------
-void checkAllCollisions(
+void Controller::checkAllCollisions(
     std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects,
-    std::vector<std::unique_ptr<StaticObject>>& staticObjects) {
+    std::vector<std::unique_ptr<StaticObject>>& staticObjects){
 
     // בדיקת התנגשויות בין אובייקטים נעים לאובייקטים סטטיים
     for (auto& movingObj : updatingObjects) {
@@ -262,9 +255,14 @@ void checkAllCollisions(
 
         for (auto& staticObj : staticObjects) {
             if (!staticObj) continue;
-
+            if (auto* gift = dynamic_cast<Gift*>(staticObj.get())) {
+                if (movingObj->getGlobalBounds().intersects(staticObj->getGlobalBounds())) {
+                    movingObj->onCollision(*staticObj, *this);
+                    gift->onCollision(*movingObj, *this);
+                }
+            }
             // בדיקת התנגשות בין נע לסטטי
-            if (movingObj->getGlobalBounds().intersects(staticObj->getGlobalBounds())) {
+            else if (movingObj->getGlobalBounds().intersects(staticObj->getGlobalBounds())) {
                 movingObj->onCollision(*staticObj);
                 staticObj->onCollision(*movingObj);
             }
@@ -320,3 +318,4 @@ void displayTime(sf::RenderWindow& window, const GameClock& clock, sf::Font& fon
     timeText.setPosition(200.f, 500.f);
     window.draw(timeText);
 }
+

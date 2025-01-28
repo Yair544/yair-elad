@@ -44,6 +44,10 @@ void Player::onCollision(Object& other) {
     other.handleCollisionWithPlayer(*this);
 }
 
+void Player::onCollision(Object& other, Controller& controller) {
+    other.handleCollisionWithPlayer(*this, controller);
+}
+
 void Player::handleCollisionWithWall(Wall& wall) {
     std::cout << "Player collided with a Wall! Stopping movement.\n";
 }

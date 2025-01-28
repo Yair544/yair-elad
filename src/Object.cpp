@@ -1,4 +1,11 @@
 #include "Object.h"
+#include "Controller.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Wall.h"
+#include "Gift.h"
+#include "TextureManager.h"
+#include "Constants.h"
 
 Object::Object() {}
 
@@ -58,10 +65,18 @@ void Object::resizeSprite(float scaleSize)
  void Object::onCollision(Object& other) {
      other.handleCollisionWith(*this);
  }
+ void Object::onCollision(Object& other, Controller& controller) {
+     other.handleCollisionWith(*this, controller);
+ }
  // פונקציות להתנגשות עם סוגים ספציפיים
   void Object::handleCollisionWith(Object& other) {
       std::cout << "1111" << std::endl;
   }
+  void Object::handleCollisionWith(Object& other, Controller& controller) {
+      std::cout << "2222" << std::endl;
+  }
   void Object::handleCollisionWithPlayer(class Player& player) {}
+  void Object::handleCollisionWithPlayer(class Player& player, Controller& controller) {};
   void Object::handleCollisionWithEnemy(class Enemy& enemy) {}
   void Object::handleCollisionWithWall(class Wall& wall) {}
+  void Object::handleCollisionWithGift(class Gift& wall, Controller& controller) {};
