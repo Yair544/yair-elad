@@ -1,10 +1,9 @@
+#include "Player.h"
 
 #include "StaticObject.h"
 #include "object.h"
 #include "TextureManager.h"
 #include <SFML/Graphics.hpp>
-#include "Player.h"
-
 
 Player::Player(sf::Vector2f v)
 {
@@ -56,6 +55,11 @@ void Player::handleCollisionWithEnemy(Enemy& enemy) {
     std::cout << "Player collided with an Enemy! Losing life.\n";
 }
 
+void Player::handleCollisionWithGift(Gift gift)
+{
+    gift.setAlive(false);
+}
+
 int Player::getAmountLife() const {
     return m_amount_life;
 }
@@ -64,3 +68,6 @@ void Player::setAmountLife(int amount) {
     m_amount_life = amount;
 }
 
+void Player::addLife() {
+    m_amount_life++;
+}

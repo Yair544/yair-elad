@@ -14,4 +14,5 @@ GiftKillEnemy::GiftKillEnemy(sf::Vector2f v)
 void GiftKillEnemy::handleCollisionWithPlayer(Player& player, Controller& controller) {
     // משפיע על המשחק דרך Controller
     std::cout << "GiftAddLive" << std::endl;
+    controller.killEnemy();
 }

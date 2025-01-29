@@ -9,12 +9,12 @@ private:
     bool m_gameOver = false; // מציין אם המשחק נגמר
 
 public:
-    // קונסטרקטור לקבלת זמן כולל (בשניות)
-    GameClock(float totalTime);
     GameClock() = default;
 
     // עדכון השעון (חישוב הזמן שנותר)
     void update();
+
+    void initClock(int time);
 
     // הוספת זמן לשעון
     void addTime(float seconds);
@@ -24,4 +24,9 @@ public:
 
     // בדיקה אם הזמן נגמר
     bool isGameOver() const;
+
+    float getDeltaTime();
+
+    void display(sf::RenderTarget& window, const sf::Font& font) const;
+
 };

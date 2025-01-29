@@ -78,5 +78,5 @@ void Object::resizeSprite(float scaleSize)
   void Object::handleCollisionWithPlayer(class Player& player) {}
   void Object::handleCollisionWithPlayer(class Player& player, Controller& controller) {};
   void Object::handleCollisionWithEnemy(class Enemy& enemy) {}
-  void Object::handleCollisionWithWall(class Wall& wall) {}
-  void Object::handleCollisionWithGift(class Gift& wall, Controller& controller) {};
+  void Object::handleCollisionWithWall(class Wall& wall) {};
+  void Object::handleCollisionWithGift(class Gift& gift) {};

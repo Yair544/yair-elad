@@ -13,7 +13,6 @@
 #include <Constants.h>
 #include <string>
 #include <TextureManager.h>
-#include <GameClock.h>
 
 //-------------------------------prototype---------------------------------------
 void loadLevelToStringVector(std::ifstream& file, std::vector<std::string>& levelByChars, int& rows, int& cols);
@@ -29,7 +28,7 @@ void drawAllObject(std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects
 Player* getPointerToPlayer(std::vector<std::unique_ptr<UpdatingObject>>& updatingObject);
 
 
-void displayTime(sf::RenderWindow& window, const GameClock& clock, sf::Font& font);
+//void displayTime(sf::RenderWindow& window, const GameClock& clock, sf::Font& font);
 
 //start
 void Controller::startGame()
@@ -92,18 +91,17 @@ void Controller::startGame()
 
     // לולאת המשחק
     window.setFramerateLimit(60);
-    GameClock gameClock(60.f); // שעון עם 60 שניות למשחק
     float enemyTimer = 0.f;
     const float moveInterval = 0.5f; // תזוזה כל 0.5 שניות
     sf::Clock deltaClock;
-
+    m_clock.initClock(60);
     while (window.isOpen())
     {
-        float deltaTime = m_clock.restart().asSeconds();
+        float deltaTime = deltaClock.restart().asSeconds();
         // עדכון השעון
-        gameClock.update();
+        m_clock.update();
         // בדיקת מצב המשחק
-        if (gameClock.isGameOver()) {
+        if (m_clock.isGameOver()) {
             std::cout << "Game Over! Time's up.\n";
             break;
         }
@@ -131,13 +129,24 @@ void Controller::startGame()
 
         window.clear();
         drawAllObject(m_updatingObjects, m_staticObjects, window);
-        displayTime(window, gameClock, font);
+        m_clock.display(window, font);
         window.display();
     }
 }
+//-----------------------------------------------------------------------------
 void Controller::killEnemy() {
-    std::cout << "aaaaaa" << std::endl;
-};
+    for (auto it = m_updatingObjects.begin(); it != m_updatingObjects.end(); ++it) {
+        if (dynamic_cast<Enemy*>(it->get())) { // בדיקת אם האובייקט הוא Enemy
+            m_updatingObjects.erase(it); // מחיקת האויב
+            return; // יציאה מהלולאה לאחר מחיקה של אויב אחד בלבד
+        }
+    }
+}
+//-----------------------------------------------------------------------------
+void Controller::addTime(int time) {
+    m_clock.addTime(time);
+}
+
 
 
 //-----------------------------------------------------------------------------
@@ -258,7 +267,7 @@ void Controller::checkAllCollisions(
             if (auto* gift = dynamic_cast<Gift*>(staticObj.get())) {
                 if (movingObj->getGlobalBounds().intersects(staticObj->getGlobalBounds())) {
                     movingObj->onCollision(*staticObj, *this);
-                    gift->onCollision(*movingObj, *this);
+                    gift->onCollision(*movingObj);
                 }
             }
             // בדיקת התנגשות בין נע לסטטי
@@ -307,15 +316,5 @@ void Controller::checkAllCollisions(
                 return obj && !obj->isAlive();
             }),
         staticObjects.end());
-}
-
-void displayTime(sf::RenderWindow& window, const GameClock& clock, sf::Font& font) {
-    sf::Text timeText;
-    timeText.setFont(font);
-    timeText.setCharacterSize(30);
-    timeText.setFillColor(sf::Color::Green);
-    timeText.setString("Time Left: " + std::to_string(static_cast<int>(clock.getTimeLeft())) + "s");
-    timeText.setPosition(200.f, 500.f);
-    window.draw(timeText);
 }
 

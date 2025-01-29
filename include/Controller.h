@@ -5,12 +5,14 @@
 #include <memory>
 #include "UpdatingObject.h"
 #include "StaticObject.h"
+#include <GameClock.h>
+
 
 class Controller {
 private:
     std::vector<std::unique_ptr<UpdatingObject>> m_updatingObjects;
     std::vector<std::unique_ptr<StaticObject>> m_staticObjects;
-    sf::Clock m_clock;
+    GameClock m_clock;
 
 public:
     void startGame();
@@ -18,4 +20,5 @@ public:
         std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects,
         std::vector<std::unique_ptr<StaticObject>>& staticObjects);
     void killEnemy();
+    void addTime(int time);
 };

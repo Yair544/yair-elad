@@ -45,6 +45,6 @@ public:
     virtual void handleCollisionWithPlayer(class Player& player, Controller& controller);
     virtual void handleCollisionWithEnemy(class Enemy& enemy);
     virtual void handleCollisionWithWall(class Wall& wall);
-    virtual void handleCollisionWithGift(class Gift& gift, Controller& controller);
+    virtual void handleCollisionWithGift(class Gift& gift);
 
 };

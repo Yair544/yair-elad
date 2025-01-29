@@ -4,6 +4,7 @@
 #include "StaticObject.h"
 #include "TextureManager.h"
 #include <Controller.h>
+#include <Player.h>
 
 
 class Gift : public StaticObject {
@@ -11,7 +12,6 @@ public:
     
     Gift();
 
-
-    //virtual void onGiftCollision(Object& other, Controller& controller) = 0;
+    void onCollision(Object& other);
 
 };

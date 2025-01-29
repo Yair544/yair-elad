@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <Wall.h>
+#include <Gift.h>
 
 
 
@@ -24,8 +25,10 @@ public:
     void onCollision(Object& other, Controller& controller);
     void handleCollisionWithWall(Wall& wall);
     void handleCollisionWithEnemy(Enemy & enemy) override;
+    void handleCollisionWithGift(Gift gift);
 
     int getAmountLife() const;
     void setAmountLife(int amount);
+    void addLife();
 };
 
