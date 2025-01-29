@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/resources
+# Install script for directory: C:/Users/user/Desktop/real/yair-elad-yair_branch/resources
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -3,7 +3,7 @@
 cmake_policy(SET CMP0009 NEW)
 
 # MY_HEADER_FILES at include/CMakeLists.txt:2 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES false RELATIVE "C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/include" "C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/include/*.h")
+file(GLOB NEW_GLOB LIST_DIRECTORIES false RELATIVE "C:/Users/user/Desktop/real/yair-elad-yair_branch/include" "C:/Users/user/Desktop/real/yair-elad-yair_branch/include/*.h")
 set(OLD_GLOB
   "Button.h"
   "Constants.h"
@@ -25,11 +25,11 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/out/build/x64-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "C:/Users/user/Desktop/real/yair-elad-yair_branch/out/build/x64-Debug/CMakeFiles/cmake.verify_globs")
 endif()
 
 # MY_SOURCE_FILES at src/CMakeLists.txt:1 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false RELATIVE "C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/src" "C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/src/*.cpp")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false RELATIVE "C:/Users/user/Desktop/real/yair-elad-yair_branch/src" "C:/Users/user/Desktop/real/yair-elad-yair_branch/src/*.cpp")
 set(OLD_GLOB
   "Button.cpp"
   "Controller.cpp"
@@ -51,5 +51,5 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/out/build/x64-Debug/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "C:/Users/user/Desktop/real/yair-elad-yair_branch/out/build/x64-Debug/CMakeFiles/cmake.verify_globs")
 endif()
