@@ -9,6 +9,10 @@
 
 Object::Object() {}
 
+void Object::setStartLocation(const sf::Vector2f& loc) { m_startLocation = loc; }
+
+sf::Vector2f Object::getStartLocation() {return m_startLocation; }
+
 void Object::setLocation(const sf::Vector2f& loc) { m_loc = loc;}
 
 sf::Vector2f Object::getLocation() const {return m_loc;}
@@ -70,10 +74,10 @@ void Object::resizeSprite(float scaleSize)
  }
  // פונקציות להתנגשות עם סוגים ספציפיים
   void Object::handleCollisionWith(Object& other) {
-      std::cout << "1111" << std::endl;
+      
   }
   void Object::handleCollisionWith(Object& other, Controller& controller) {
-      std::cout << "2222" << std::endl;
+      
   }
   void Object::handleCollisionWithPlayer(class Player& player) {}
   void Object::handleCollisionWithPlayer(class Player& player, Controller& controller) {};

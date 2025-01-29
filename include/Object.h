@@ -14,12 +14,18 @@ class Gift;
 class Object {
 private:
 
+    sf::Vector2f m_startLocation;
     sf::Vector2f m_loc;
     sf::Sprite m_sprite;
     bool m_alive;
 
 public:
     Object();
+    virtual ~Object() = default;
+
+    void setStartLocation(const sf::Vector2f& loc);
+
+    sf::Vector2f getStartLocation();
 
     void setLocation(const sf::Vector2f& loc);
 

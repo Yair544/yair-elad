@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include "Wall.h"
+#include "Rock.h"
 
 
 
@@ -17,5 +19,11 @@ public:
 
     void onCollision(Object& other) override;
     void handleCollisionWithPlayer(Player& player);
+    void move(float speed, float deltatime, sf::Vector2f playerLocation,
+        const  std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects,
+        const std::vector<std::unique_ptr<StaticObject>>& staticObjects);
+    bool checkPotentialMove(const sf::Vector2f& movement,
+        const std::vector<std::unique_ptr<UpdatingObject>>& updatingObjects,
+        const std::vector<std::unique_ptr<StaticObject>>& staticObjects);
 
 };

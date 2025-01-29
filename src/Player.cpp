@@ -4,45 +4,69 @@
 #include "TextureManager.h"
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Controller.h"
 
 
-Player::Player(sf::Vector2f v)
+
+Player::Player(sf::Vector2f v, Controller* controller)
 {
+    setStartLocation(v);
     setSprite(v, "player");
     this->setAmountLife(5);
+    m_controller = controller;
 }
 
 
-void Player::move(int speed, float deltaTime, sf::Keyboard::Key key)
-{
-    sf::Vector2f loc=getLocation();
+void Player::move(float speed, float deltaTime, sf::Keyboard::Key key,
+    const std::vector<std::unique_ptr<StaticObject>>& staticObjects) {
 
-    switch (key)
-    {
+    sf::Vector2f movement(0.f, 0.f);
+    switch (key) {
     case sf::Keyboard::Right:
-        loc.x += speed * deltaTime;
-        setLocation(loc);
+        movement.x += speed * deltaTime;
         break;
     case sf::Keyboard::Left:
-        loc.x -= speed * deltaTime;
-        setLocation(loc);
+        movement.x -= speed * deltaTime;
         break;
     case sf::Keyboard::Up:
-        loc.y -= speed * deltaTime;
-        setLocation(loc);
+        movement.y -= speed * deltaTime;
         break;
     case sf::Keyboard::Down:
-        loc.y += speed * deltaTime;
-        setLocation(loc);
+        movement.y += speed * deltaTime;
         break;
     default:
         break;
     }
+
+    // stop moving if collision with wall or rock
+    sf::FloatRect potentialBounds = getGlobalBounds();
+    potentialBounds.left += movement.x;
+    potentialBounds.top += movement.y;
+
+    for (const auto& obj : staticObjects) {
+        if (typeid(*obj) == typeid(Wall) || typeid(*obj) == typeid(Rock))
+        {
+            if (potentialBounds.intersects(obj->getGlobalBounds()))
+            {
+
+                std::cout << "collision with: " << typeid(*obj).name() << std::endl;
+                std::cout << "dont move!!!!!!!!!! " << std::endl;
+                return;
+            }
+        }
+    }
+
+    //movment if not collision
+    setLocation({ getLocation().x + movement.x,getLocation().y + movement.y });
+
+
 }
 
 void Player::onCollision(Object& other) {
     other.handleCollisionWithPlayer(*this);
 }
+
+
 
 void Player::onCollision(Object& other, Controller& controller) {
     other.handleCollisionWithPlayer(*this, controller);
@@ -53,7 +77,16 @@ void Player::handleCollisionWithWall(Wall& wall) {
 }
 
 void Player::handleCollisionWithEnemy(Enemy& enemy) {
+    m_amount_life--;
+
     std::cout << "Player collided with an Enemy! Losing life.\n";
+    if (m_amount_life <= 0) {
+        std::cout << "Game Over! Player has no more lives.\n";
+        exit(EXIT_SUCCESS); 
+    }
+    else {
+        m_controller->resetGame();  
+    }
 }
 
 int Player::getAmountLife() const {
