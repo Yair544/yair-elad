@@ -2,8 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "Button.h"
 #include <iostream>
-
-
+/// <summary>
+/// /
+/// </summary>
 class Constants {
 public:
     // Window properties
