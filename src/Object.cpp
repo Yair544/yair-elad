@@ -1,6 +1,17 @@
 #include "Object.h"
+#include "Controller.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Wall.h"
+#include "Gift.h"
+#include "TextureManager.h"
+#include "Constants.h"
 
 Object::Object() {}
+
+void Object::setStartLocation(const sf::Vector2f& loc) { m_startLocation = loc; }
+
+sf::Vector2f Object::getStartLocation() {return m_startLocation; }
 
 void Object::setLocation(const sf::Vector2f& loc) { m_loc = loc;}
 
@@ -58,10 +69,18 @@ void Object::resizeSprite(float scaleSize)
  void Object::onCollision(Object& other) {
      other.handleCollisionWith(*this);
  }
+ void Object::onCollision(Object& other, Controller& controller) {
+     other.handleCollisionWith(*this, controller);
+ }
  // פונקציות להתנגשות עם סוגים ספציפיים
   void Object::handleCollisionWith(Object& other) {
-      std::cout << "1111" << std::endl;
+      
+  }
+  void Object::handleCollisionWith(Object& other, Controller& controller) {
+      
   }
   void Object::handleCollisionWithPlayer(class Player& player) {}
+  void Object::handleCollisionWithPlayer(class Player& player, Controller& controller) {};
   void Object::handleCollisionWithEnemy(class Enemy& enemy) {}
   void Object::handleCollisionWithWall(class Wall& wall) {}
+  void Object::handleCollisionWithGift(class Gift& wall, Controller& controller) {};

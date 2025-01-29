@@ -8,5 +8,8 @@ GiftTime::GiftTime(sf::Vector2f v)
 
 }
 
-
+void GiftTime::handleCollisionWithPlayer(Player& player, Controller& controller) {
+    // משפיע על המשחק דרך Controller
+    std::cout << "GiftTime" << std::endl;
+}
 

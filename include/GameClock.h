@@ -11,6 +11,7 @@ private:
 public:
     // קונסטרקטור לקבלת זמן כולל (בשניות)
     GameClock(float totalTime);
+    GameClock() = default;
 
     // עדכון השעון (חישוב הזמן שנותר)
     void update();

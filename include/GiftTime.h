@@ -10,6 +10,5 @@ public:
 
     GiftTime(sf::Vector2f v);
   
-
+    void handleCollisionWithPlayer(Player& player, Controller& controller) override;
 };
-

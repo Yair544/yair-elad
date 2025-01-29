@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE
+# Install script for directory: C:/Users/user/Desktop/real/yair-elad-yair_branch
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,17 +34,17 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/out/build/x64-Debug/include/cmake_install.cmake")
+  include("C:/Users/user/Desktop/real/yair-elad-yair_branch/out/build/x64-Debug/include/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/out/build/x64-Debug/src/cmake_install.cmake")
+  include("C:/Users/user/Desktop/real/yair-elad-yair_branch/out/build/x64-Debug/src/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/out/build/x64-Debug/resources/cmake_install.cmake")
+  include("C:/Users/user/Desktop/real/yair-elad-yair_branch/out/build/x64-Debug/resources/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/yair0/Downloads/eelad/oop1_project-YOUR-NAME-HERE/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/user/Desktop/real/yair-elad-yair_branch/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -7,3 +7,7 @@ GiftFreeze::GiftFreeze(sf::Vector2f v)
 
 }
 
+void GiftFreeze::handleCollisionWithPlayer(Player& player, Controller& controller) {
+    // משפיע על המשחק דרך Controller
+    std::cout << "GiftFreeze" << std::endl;
+}
